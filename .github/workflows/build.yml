@@ -59,21 +59,13 @@ jobs:
             echo "Using Tag Version: $version (JPackage: $jversion)"
           fi
 
-          # 2. 如果没有 Tag 或解析失败，回退到从 Jar 文件名提取
+          # 2. 如果没有 Tag 或解析失败，回退到默认版本
           if [ -z "$version" ]; then
-            echo "No valid tag version found, falling back to Jar filename extraction..."
-          
-            # 假设文件名格式为 app-name-version.jar
-            version=$(echo "$filename" | sed -E "s/^${{ env.APP_NAME }}-(.+)\.jar$/\1/")
-          
-            # 规范化版本
-            jversion=$(echo "$version" | sed -E 's/^([0-9]+\.[0-9]+(\.[0-9]+)?).*/\1/')
-            if [ -z "$jversion" ]; then jversion="0.1.0"; fi
-          
-            echo "Using Jar Filename Version: $version (JPackage: $jversion)"
+            echo "No valid tag version found, falling back to default Version"
+            jversion="0.1.0"
+            echo "Using default Version: $jversion"
           fi
           
-          echo "version=$version" >> $GITHUB_OUTPUT
           echo "jversion=$jversion" >> $GITHUB_OUTPUT
 
       - name: Create zip archive
