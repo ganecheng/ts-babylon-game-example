@@ -41,7 +41,8 @@ jobs:
         id: metadata
         shell: bash
         run: |
-          # 1. 优先尝试从 Git Tag 获取版本号
+          jversion="0.1.0"
+          
           if [[ "${{ github.ref_type }}" == "tag" ]]; then
             raw_tag="${{ github.ref_name }}"
             echo "Detected Tag: $raw_tag"
@@ -59,13 +60,6 @@ jobs:
             echo "Using Tag Version: $version (JPackage: $jversion)"
           fi
 
-          # 2. 如果没有 Tag 或解析失败，回退到默认版本
-          if [ -z "$version" ]; then
-            echo "No valid tag version found, falling back to default Version"
-            jversion="0.1.0"
-            echo "Using default Version: $jversion"
-          fi
-          
           echo "jversion=$jversion" >> $GITHUB_OUTPUT
 
       - name: Create zip archive
