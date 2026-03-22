@@ -17,6 +17,7 @@
   "license": "MIT",
   "dependencies": {
     "@babylonjs/core": "^8.56.0",
+    "@babylonjs/gui": "^8.56.0",
     "@babylonjs/loaders": "^8.56.0",
     "babylonjs": "^8.56.0"
   },
