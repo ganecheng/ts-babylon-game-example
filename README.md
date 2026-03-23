@@ -1,1 +1,0 @@
-# ts-babylon-game-example
